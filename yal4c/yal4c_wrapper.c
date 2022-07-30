@@ -17,7 +17,7 @@ void yal4c_settimer (char* (*timer) (void)) {_yal4c_timer = timer;}
 
 #define $yal4c_wrapper_snippet(t) yal4c_lock (f);                  \
                                   yal4c_write (f, "[");            \
-                                  yal4c_write (f, yal4c_timer ()); \
+                                  yal4c_write (f, _yal4c_timer ()); \
                                   yal4c_write (f, "] [" #t "] ");  \
                                   yal4c_write (f, s);              \
                                   yal4c_write (f, "\n");           \
