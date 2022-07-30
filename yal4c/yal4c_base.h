@@ -5,14 +5,15 @@
 #define YAL4C_BASE_INCLUDED
 
 #include <fcntl.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 
 typedef struct yal4c_logfile_struct
 {
-    int standard;
-    int backupfile;
+    const int standard;
+    const int backupfile;
     volatile int lock;
 } yal4c_logfile;
 

@@ -3,14 +3,14 @@
 
 #include "yal4c_base.h"
 
-yal4c_logfile* yal4c_open (int standard, const char* fn)
+yal4c_logfile* yal4c_open_log (int standard, const char* fn)
 {
     if (standard == -1) goto yal4c$open$ret;
     yal4c_logfile* log = malloc (sizeof (yal4c_logfile));
     if (log == NULL) goto yal4c$open$ret;
     log -> lock = 0;
-    log -> standard = standard;
-    log -> backupfile = open (fn, O_WRONLY | O_TRUNC | O_BINARY);
+    * ((int*) (&(log -> standard))) = standard;
+    * ((int*) (&(log -> backupfile))) = open (fn, O_WRONLY | O_CREAT, 511);
     if (log -> backupfile == -1)
     {
         free (log);

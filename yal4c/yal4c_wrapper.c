@@ -7,7 +7,10 @@
 
 char* yal4c_timer (void)
 {
-    return ctime (localtime (time (NULL)));
+    time_t t = time (NULL);
+    char* res = ctime (&t);
+    res [24] = 0;
+    return res;
 }
 char* (*_yal4c_timer) (void) = yal4c_timer;
 void yal4c_settimer (char* (*timer) (void)) {_yal4c_timer = timer;}
@@ -18,7 +21,7 @@ void yal4c_settimer (char* (*timer) (void)) {_yal4c_timer = timer;}
                                   yal4c_write (f, "] [" #t "] ");  \
                                   yal4c_write (f, s);              \
                                   yal4c_write (f, "\n");           \
-                                  yal4c_unlock (f);
+                                  yal4c_unlock (f);                \
 
 volatile int _yal4c_info_counter;
 void yal4c_info (yal4c_logfile* f, const char* s)
@@ -26,7 +29,7 @@ void yal4c_info (yal4c_logfile* f, const char* s)
     $yal4c_wrapper_snippet (INFO);
     _yal4c_info_counter ++;
 }
-void yal4c_info_counter (void) {return _yal4c_info_counter;}
+int yal4c_info_counter (void) {return _yal4c_info_counter;}
 
 volatile int _yal4c_warn_counter;
 void yal4c_warn (yal4c_logfile* f, const char* s)
@@ -34,15 +37,15 @@ void yal4c_warn (yal4c_logfile* f, const char* s)
     $yal4c_wrapper_snippet (WARN);
     _yal4c_warn_counter ++;
 }
-void yal4c_warn_counter (void) {return _yal4c_warn_counter;}
+int yal4c_warn_counter (void) {return _yal4c_warn_counter;}
 
 volatile int _yal4c_error_counter;
-void yal4c_warn (yal4c_logfile* f, const char* s)
+void yal4c_error (yal4c_logfile* f, const char* s)
 {
     $yal4c_wrapper_snippet (ERROR);
     _yal4c_error_counter ++;
 }
-void yal4c_error_counter (void) {return _yal4c_error_counter;}
+int yal4c_error_counter (void) {return _yal4c_error_counter;}
 
 volatile int _yal4c_debug_counter, _yal4c_debug_enabled;
 void yal4c_enable_debug (void)
@@ -55,7 +58,7 @@ void yal4c_debug (yal4c_logfile* f, const char* s)
     $yal4c_wrapper_snippet (DEBUG);
     _yal4c_debug_counter ++;
 }
-void yal4c_debug_counter (void) {return _yal4c_debug_counter;}
+int yal4c_debug_counter (void) {return _yal4c_debug_counter;}
 
 void yal4c_fatal (yal4c_logfile* f, const char* s)
 {
