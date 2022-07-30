@@ -11,12 +11,14 @@
 
 typedef struct yal4c_logfile_struct
 {
-    volatile int standard;
-    volatile int backupfile;
+    int standard;
+    int backupfile;
     volatile int lock;
 } yal4c_logfile;
 
 extern yal4c_logfile* yal4c_open_log (int, const char*);
+extern void yal4c_lock (yal4c_logfile*);
+extern void yal4c_unlock (yal4c_logfile*);
 extern int yal4c_write (yal4c_logfile*, const char*);
 extern int yal4c_close (yal4c_logfile*);
 

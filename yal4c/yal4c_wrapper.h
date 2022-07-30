@@ -6,22 +6,20 @@
 
 typedef struct yal4c_logfile_struct yal4c_logfile;
 
-extern
-{
-    char* yal4c_timer (void);
-    void yal4c_settimer (char* (*) (void));
-    void yal4c_info (yal4c_logfile*, const char*);
-    void yal4c_warn (yal4c_logfile*, const char*);
-    void yal4c_error (yal4c_logfile*, const char*);
-    void yal4c_fatal (yal4c_logfile*, const char*);
-    void yal4c_debug (yal4c_logfile*, const char*);
-    void yal4c_enable_debug (void);
-    int yal4c_info_counter (void);
-    int yal4c_warn_counter (void);
-    int yal4c_error_counter (void);
-    int yal4c_debug_counter (void);
-    yal4c_logfile* yal4c_open_log (int, const char*);
-    int yal4c_close (yal4c_logfile*);
-}
+char* yal4c_timer (void);
+void yal4c_settimer (char* (*) (void));
+void yal4c_info (yal4c_logfile*, const char*);
+void yal4c_warn (yal4c_logfile*, const char*);
+void yal4c_error (yal4c_logfile*, const char*);
+void yal4c_fatal (yal4c_logfile*, const char*);
+void yal4c_debug (yal4c_logfile*, const char*);
+void yal4c_enable_debug (void);
+int yal4c_info_counter (void);
+int yal4c_warn_counter (void);
+int yal4c_error_counter (void);
+int yal4c_debug_counter (void);
+
+yal4c_logfile* yal4c_open_log (int, const char*);
+int yal4c_close (yal4c_logfile*);
 
 #endif

@@ -21,14 +21,22 @@ yal4c_logfile* yal4c_open (int standard, const char* fn)
     return NULL;
 }
 
+void yal4c_lock (yal4c_logfile* f)
+{
+    while (f -> lock);
+    f -> lock = 1;
+}
+
+void yal4c_unlock (yal4c_logfile* f)
+{
+    f -> lock = 0;
+}
+
 int yal4c_write (yal4c_logfile* f, const char* s)
 {
     unsigned int l = strlen (s);
-    while (f -> lock);
-    f -> lock = 1;
     int a = write (f -> standard, s, l);
     int b = write (f -> backupfile, s, l);
-    f -> lock = 0;
     return a > b ? b : a;
 }
 
