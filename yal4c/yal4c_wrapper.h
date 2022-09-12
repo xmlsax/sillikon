@@ -5,7 +5,7 @@
 #define YAL4C_WRAPPER_INCLUDED
 
 /* YAL4C 1.2.0+ has a macro for version */
-#define YAL4C_VERSION 0x010200
+#define YAL4C_VERSION 0x010201
 
 typedef struct yal4c_logfile_struct yal4c_logfile;
 

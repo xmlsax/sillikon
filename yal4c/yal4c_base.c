@@ -33,6 +33,7 @@ int yal4c_close (yal4c_logfile* f)
 {
     close (f -> standard);
     close (f -> backupfile);
+    mutex_destroy (&(f -> lock));
     /* Free it */
     #ifndef YAL4C_CLOSE_NO_FREE
     free (f);
