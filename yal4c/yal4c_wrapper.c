@@ -15,13 +15,13 @@ char* yal4c_timer (void)
 char* (*_yal4c_timer) (void) = yal4c_timer;
 void yal4c_settimer (char* (*timer) (void)) {_yal4c_timer = timer;}
 
-#define $yal4c_wrapper_snippet(t) yal4c_lock (f);                  \
+#define $yal4c_wrapper_snippet(t) mutex_lock (&(f -> lock));       \
                                   yal4c_write (f, "[");            \
-                                  yal4c_write (f, _yal4c_timer ()); \
+                                  yal4c_write (f, _yal4c_timer ());\
                                   yal4c_write (f, "] [" #t "] ");  \
                                   yal4c_write (f, s);              \
                                   yal4c_write (f, "\n");           \
-                                  yal4c_unlock (f);                \
+                                  mutex_unlock (&(f -> lock));     \
 
 volatile int _yal4c_info_counter;
 void yal4c_info (yal4c_logfile* f, const char* s)
@@ -60,8 +60,9 @@ void yal4c_debug (yal4c_logfile* f, const char* s)
 }
 int yal4c_debug_counter (void) {return _yal4c_debug_counter;}
 
+void (*yal4c_fatal_func) (void) = abort;
 void yal4c_fatal (yal4c_logfile* f, const char* s)
 {
     $yal4c_wrapper_snippet (FATAL);
-    abort ();
+    yal4c_fatal_func ();
 }

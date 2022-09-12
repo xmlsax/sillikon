@@ -4,7 +4,12 @@
 #ifndef YAL4C_WRAPPER_INCLUDED
 #define YAL4C_WRAPPER_INCLUDED
 
+/* YAL4C 1.2.0+ has a macro for version */
+#define YAL4C_VERSION 0x010200
+
 typedef struct yal4c_logfile_struct yal4c_logfile;
+
+void (*yal4c_fatal_func) (void);
 
 char* yal4c_timer (void);
 void yal4c_settimer (char* (*) (void));

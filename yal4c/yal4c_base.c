@@ -8,7 +8,7 @@ yal4c_logfile* yal4c_open_log (int standard, const char* fn)
     if (standard == -1) goto yal4c$open$ret;
     yal4c_logfile* log = malloc (sizeof (yal4c_logfile));
     if (log == NULL) goto yal4c$open$ret;
-    log -> lock = 0;
+    mutex_init (&(log -> lock));
     * ((int*) (&(log -> standard))) = standard;
     * ((int*) (&(log -> backupfile))) = open (fn, O_WRONLY | O_CREAT, 511);
     if (log -> backupfile == -1)
@@ -19,17 +19,6 @@ yal4c_logfile* yal4c_open_log (int standard, const char* fn)
     return log;
     yal4c$open$ret:
     return NULL;
-}
-
-void yal4c_lock (yal4c_logfile* f)
-{
-    while (f -> lock);
-    f -> lock = 1;
-}
-
-void yal4c_unlock (yal4c_logfile* f)
-{
-    f -> lock = 0;
 }
 
 int yal4c_write (yal4c_logfile* f, const char* s)

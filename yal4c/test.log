@@ -1,5 +1,4 @@
-[Sat Jul 30 17:28:36 2022] [INFO] This is INFO!
-[Sat Jul 30 17:28:36 2022] [ERROR] Nop no error
-[Sat Jul 30 17:28:36 2022] [DEBUG] Uhhhhhhhhhhh
-[Sat Jul 30 17:28:36 2022] [FATAL] Errrrrr...
-...
+[;p] [INFO] This is INFO!
+[;p] [ERROR] Nop no error
+[;p] [DEBUG] Uhhhhhhhhhhh
+[;p] [FATAL] Errrrrr...

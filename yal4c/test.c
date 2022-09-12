@@ -23,5 +23,9 @@ int main (void)
     
     printf ("%d of INFO, %d of ERROR, %d of DEBUG\n", yal4c_info_counter (), yal4c_error_counter (), yal4c_debug_counter ());
     
+    int t; scanf ("%d", &t); /* Waiting for user to continue */
+
+    yal4c_fatal_func = NULL; /* Is it Segmentation Fault? Yep */
+
     yal4c_fatal (log, "Errrrrr...");
 }
